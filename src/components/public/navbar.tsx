@@ -156,7 +156,7 @@ export default function Navbar({ currentPage, isLoggedIn = true }: { currentPage
             ) : (
               <div className="flex items-center gap-3">
                 <Button variant="ghost" size="sm" asChild>
-                  <Link href={"#"}>Sign In</Link>
+                  <Link href={"/login"}>Sign In</Link>
                 </Button>
                 <Button variant="default" size="sm" asChild>
                   <Link href={"#"}>Sign Up</Link>
