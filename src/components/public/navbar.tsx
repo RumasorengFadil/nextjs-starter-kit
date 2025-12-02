@@ -159,7 +159,7 @@ export default function Navbar({ currentPage, isLoggedIn = true }: { currentPage
                   <Link href={"/login"}>Sign In</Link>
                 </Button>
                 <Button variant="default" size="sm" asChild>
-                  <Link href={"#"}>Sign Up</Link>
+                  <Link href={"/register"}>Sign Up</Link>
                 </Button>
               </div>
             )}

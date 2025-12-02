@@ -7,7 +7,7 @@ import { GoogleButton } from "@/app/(main)/auth/_components/social-auth/google-b
 
 export default function RegisterV1() {
   return (
-    <div className="flex h-dvh">
+    <div className="flex h-dvh overflow-hidden">
       <div className="bg-background flex w-full items-center justify-center p-8 lg:w-2/3">
         <div className="w-full max-w-md space-y-10 py-24 lg:py-32">
           <div className="space-y-4 text-center">
