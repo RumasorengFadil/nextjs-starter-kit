@@ -9,7 +9,7 @@ export default function PublicLayoutClient({ children }: { children: ReactNode }
   const pathname = usePathname();
   return (
     <>
-      <Navbar currentPage={pathname} />
+      <Navbar isLoggedIn={false} currentPage={pathname} />
       {children}
     </>
   );
