@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 
-export default function Navbar({ currentPage }: { currentPage: string }) {
+export default function Navbar({ currentPage, isLoggedIn = true }: { currentPage: string; isLoggedIn?: boolean }) {
   const navItems = [
     {
       label: "Home",
@@ -42,7 +42,7 @@ export default function Navbar({ currentPage }: { currentPage: string }) {
           {/* Logo */}
           <div className="flex items-center gap-8">
             <Link href="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-blue-700">
+              <div className="from-primary flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br to-blue-700">
                 <GraduationCap className="h-5 w-5 text-white" />
               </div>
               <span className="text-neutral-900">Mekari University</span>
@@ -75,81 +75,94 @@ export default function Navbar({ currentPage }: { currentPage: string }) {
               />
             </div>
 
-            {/* Notifications */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="relative">
-                  <Bell className="h-5 w-5" />
-                  <Badge className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center bg-blue-600 p-0">
-                    3
-                  </Badge>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-80">
-                <DropdownMenuLabel>Notifications</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="flex flex-col items-start py-3">
-                  <div className="mb-1 flex items-center gap-2">
-                    <div className="h-2 w-2 rounded-full bg-blue-600" />
-                    <span>New course available</span>
-                  </div>
-                  <span className="ml-4 text-neutral-500">Advanced Python Programming is now live</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex flex-col items-start py-3">
-                  <div className="mb-1 flex items-center gap-2">
-                    <div className="h-2 w-2 rounded-full bg-blue-600" />
-                    <span>Certificate ready</span>
-                  </div>
-                  <span className="ml-4 text-neutral-500">Your React certification is ready to download</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="flex flex-col items-start py-3">
-                  <span>Assignment due soon</span>
-                  <span className="text-neutral-500">Project submission due in 2 days</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {isLoggedIn ? (
+              <>
+                {/* Notifications */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" size="icon" className="relative">
+                      <Bell className="h-5 w-5" />
+                      <Badge className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center bg-blue-600 p-0">
+                        3
+                      </Badge>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-80">
+                    <DropdownMenuLabel>Notifications</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem className="flex flex-col items-start py-3">
+                      <div className="mb-1 flex items-center gap-2">
+                        <div className="h-2 w-2 rounded-full bg-blue-600" />
+                        <span>New course available</span>
+                      </div>
+                      <span className="ml-4 text-neutral-500">Advanced Python Programming is now live</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="flex flex-col items-start py-3">
+                      <div className="mb-1 flex items-center gap-2">
+                        <div className="h-2 w-2 rounded-full bg-blue-600" />
+                        <span>Certificate ready</span>
+                      </div>
+                      <span className="ml-4 text-neutral-500">Your React certification is ready to download</span>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="flex flex-col items-start py-3">
+                      <span>Assignment due soon</span>
+                      <span className="text-neutral-500">Project submission due in 2 days</span>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
 
-            {/* User Menu */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="gap-2 px-2">
-                  <Avatar className="h-8 w-8">
-                    <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=User" />
-                    <AvatarFallback>JD</AvatarFallback>
-                  </Avatar>
-                  <span className="hidden md:inline">John Doe</span>
+                {/* User Menu */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="gap-2 px-2">
+                      <Avatar className="h-8 w-8">
+                        <AvatarImage src="https://api.dicebear.com/7.x/avataaars/svg?seed=User" />
+                        <AvatarFallback>JD</AvatarFallback>
+                      </Avatar>
+                      <span className="hidden md:inline">John Doe</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem className="cursor-pointer" asChild>
+                      <Link href={""}>
+                        <LayoutDashboard className="mr-2 h-4 w-4" />
+                        Dashboard
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer" asChild>
+                      <Link href={""}>
+                        <User className="mr-2 h-4 w-4" />
+                        Profile
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer" asChild>
+                      <Link href={""}>
+                        <BookOpen className="mr-2 h-4 w-4" />
+                        My Courses
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem className="cursor-pointer" asChild>
+                      <Link href={""}>Settings</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem className="cursor-pointer" asChild>
+                      <Link href={""}>Sign Out</Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </>
+            ) : (
+              <div className="flex items-center gap-3">
+                <Button variant="ghost" size="sm" asChild>
+                  <Link href={"#"}>Sign In</Link>
                 </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="cursor-pointer" asChild>
-                  <Link href={""}>
-                    <LayoutDashboard className="mr-2 h-4 w-4" />
-                    Dashboard
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer" asChild>
-                  <Link href={""}>
-                    <User className="mr-2 h-4 w-4" />
-                    Profile
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer" asChild>
-                  <Link href={""}>
-                    <BookOpen className="mr-2 h-4 w-4" />
-                    My Courses
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="cursor-pointer" asChild>
-                  <Link href={""}>Settings</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="cursor-pointer" asChild>
-                  <Link href={""}>Sign Out</Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                <Button variant="default" size="sm" asChild>
+                  <Link href={"#"}>Sign Up</Link>
+                </Button>
+              </div>
+            )}
 
             {/* Mobile Menu Button */}
             <Button
