@@ -17,15 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 
-export default function Navbar({
-  currentPage,
-  isLoggedIn = true,
-  test,
-}: {
-  currentPage: string;
-  isLoggedIn?: boolean;
-  test: string;
-}) {
+export default function Navbar({ currentPage, isLoggedIn = true }: { currentPage: string; isLoggedIn?: boolean }) {
   const navItems = [
     {
       label: "Home",
