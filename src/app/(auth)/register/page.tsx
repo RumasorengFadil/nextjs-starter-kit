@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 import { Command } from "lucide-react";
+import { RegisterForm } from "@/features/auth/components/register-form";
+import { GoogleButton } from "@/features/auth/components/google-button";
 
-import { RegisterForm } from "@/app/(main)/auth/_components/register-form";
-import { GoogleButton } from "@/app/(main)/auth/_components/social-auth/google-button";
 
 export default function RegisterV1() {
   return (

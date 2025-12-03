@@ -2,10 +2,10 @@ import Link from "next/link";
 
 import { Command } from "lucide-react";
 
-import { LoginForm } from "@/app/(main)/auth/_components/login-form";
-import { GoogleButton } from "@/app/(main)/auth/_components/social-auth/google-button";
+import { LoginForm } from "@/features/auth/components/login-form";
+import { GoogleButton } from "@/features/auth/components/google-button";
 
-export default function LoginV1() {
+export default function Login() {
   return (
     <div className="flex h-dvh overflow-hidden">
       <div className="bg-primary hidden lg:block lg:w-1/3">
