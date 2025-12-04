@@ -7,8 +7,6 @@ import { useAuth } from "@/hooks/use-auth.hook";
 export default function AuthBoot() {
   const { data } = useAuth();
   const setUser = useAuthStore((s) => s.setUser);
-  const setToken = useAuthStore((s) => s.setToken);
-
   useEffect(() => {
     async function loadSession() {
       try {

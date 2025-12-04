@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 
-export default function Navbar({ currentPage, isLoggedIn = true }: { currentPage: string; isLoggedIn?: boolean }) {
+export default function Navbar({ currentPage, isLoggedIn = false, handleLogout }: { currentPage: string; isLoggedIn?: boolean, handleLogout:()=>void }) {
   const navItems = [
     {
       label: "Home",
@@ -148,7 +148,7 @@ export default function Navbar({ currentPage, isLoggedIn = true }: { currentPage
                       <Link href={""}>Settings</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem className="cursor-pointer" asChild>
-                      <Link href={""}>Sign Out</Link>
+                      <li onClick={handleLogout}>Sign Out</li >
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>

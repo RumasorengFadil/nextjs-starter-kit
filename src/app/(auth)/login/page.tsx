@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 
 import { Command } from "lucide-react";
@@ -30,7 +31,9 @@ export default function Login() {
           </div>
           <div className="space-y-4">
             <LoginForm />
-            <GoogleButton className="w-full" variant="outline" />
+            <Link href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google`}>
+              <GoogleButton className="w-full" variant="outline" />
+            </Link >
             <p className="text-muted-foreground text-center text-xs">
               Don&apos;t have an account?{" "}
               <Link prefetch={false} href="register" className="text-primary">

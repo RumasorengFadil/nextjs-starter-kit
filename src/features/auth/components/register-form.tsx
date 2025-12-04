@@ -9,6 +9,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import type { RegisterForm } from "../types";
 import useRegister from "../hooks/use-register.hook";
+import ButtonWithLoading from "@/components/ButtonWithLoadingV1";
 
 const FormSchema = z
   .object({
@@ -33,7 +34,7 @@ export function RegisterForm() {
     },
   });
 
-  const { mutate } = useRegister();
+  const { mutate, isPending } = useRegister();
 
   const onSubmit = async (data: RegisterForm) => mutate(data);
 
@@ -98,9 +99,13 @@ export function RegisterForm() {
             </FormItem>
           )}
         />
-        <Button className="w-full" type="submit">
+        <ButtonWithLoading
+          className="w-full" type="submit"
+          isLoading={isPending}
+          disabled={isPending}
+        >
           Register
-        </Button>
+        </ButtonWithLoading>
       </form>
     </Form>
   );

@@ -8,31 +8,22 @@ export async function registerUser(user:RegisterForm){
 }
 
 export async function loginUser(credentials:LoginCredentials){
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
-        method:"POST",
-        body:JSON.stringify(credentials), 
-        credentials:"include"
-    });
+    const res = await api.post("/auth/login", credentials);
+
+    return res.data;
     
-    return res.json();
 }
 
 export async function refreshToken(){
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, {
-        method:"POST",
-        credentials:"include"
-    });
-    
-    return res.json();
+    const res = await api.post("/auth/refresh");
+
+    return res.data;
 }
 
-export async function google(){
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/google`, {
-        method:"get",
-        credentials:"include"
-    });
-    
-    return res.json();
+export async function loginGoogle(){
+    const res = await api.get("/auth/google");
+
+    return res.data;
 }
 
 export async function me(){
@@ -42,19 +33,13 @@ export async function me(){
 }
 
 export async function verifyEmail(token:string){
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/verify/?token=${token}`, {
-        method:"POST",
-        credentials:"include"
-    });
-    
-    return res.json();
+     const res = await api.get(`/auth/verify/?token=${token}`);
+
+    return res.data;
 }
 
 export async function logout(){
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
-        method:"POST",
-        credentials:"include"
-    });
-    
-    return res.json();
+    const res = await api.post(`/auth/logout`);
+
+    return res.data;
 }

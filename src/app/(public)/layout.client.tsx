@@ -4,14 +4,17 @@ import { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 
 import Navbar from "@/components/public/navbar";
-import { useAuthStore } from "@/context/store/auth.store";
+import useLogout from "@/features/auth/hooks/use-logout.hook";
+import { useAuth } from "@/hooks/use-auth.hook";
 
 export default function PublicLayoutClient({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const auth = useAuthStore();
+  const {data:user} = useAuth();
+  const {mutate} = useLogout();
+console.log(user);
   return (
     <>
-      <Navbar isLoggedIn={auth.isAuthenticated} currentPage={pathname} />
+      <Navbar isLoggedIn={user?.isEmailVerified} currentPage={pathname} handleLogout={mutate} />
       {children}
     </>
   );

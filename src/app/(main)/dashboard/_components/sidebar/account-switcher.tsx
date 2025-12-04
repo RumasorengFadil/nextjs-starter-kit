@@ -14,6 +14,7 @@ import {
   DropdownMenuGroup,
 } from "@/components/ui/dropdown-menu";
 import { cn, getInitials } from "@/lib/utils";
+import useLogout from "@/features/auth/hooks/use-logout.hook";
 
 export function AccountSwitcher({
   users,
@@ -27,6 +28,7 @@ export function AccountSwitcher({
   }>;
 }) {
   const [activeUser, setActiveUser] = useState(users[0]);
+  const { mutate } = useLogout();
 
   return (
     <DropdownMenu>
@@ -71,7 +73,7 @@ export function AccountSwitcher({
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={() => mutate()}>
           <LogOut />
           Log out
         </DropdownMenuItem>

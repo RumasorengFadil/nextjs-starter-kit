@@ -18,7 +18,9 @@ export default function RegisterV1() {
           </div>
           <div className="space-y-4">
             <RegisterForm />
-            <GoogleButton className="w-full" variant="outline" />
+            <Link href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google`}>
+              <GoogleButton className="w-full" variant="outline" />
+            </Link >
             <p className="text-muted-foreground text-center text-xs">
               Already have an account?{" "}
               <Link prefetch={false} href="login" className="text-primary">
