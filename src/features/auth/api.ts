@@ -1,21 +1,13 @@
 import { LoginCredentials, RegisterForm } from "./types";
+import axios from "axios";
 
-export async function register(user:RegisterForm){
-    try{
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/register`, {
-            method:"POST",
-            body:JSON.stringify(user), 
-            credentials:"include",
-            headers:{
-                "Content-Type" : "application/json"
-            }
-        });
-        
-        return res.json();
-    }catch(err:any){
-        console.log(err);
-        throw err
-    }
+export async function registerUser(user:RegisterForm){
+    const res = await axios.post("/auth/register", user, {
+        baseURL:process.env.NEXT_PUBLIC_API_URL, 
+        withCredentials:true
+    });
+
+    return res.data;
 }
 
 export async function login(credentials:LoginCredentials){

@@ -1,27 +1,17 @@
-import { useState } from "react"
+import { registerUser } from "../api";
 import { RegisterForm, User } from "../types";
-import { register } from "../api";
+import { useMutation } from '@tanstack/react-query';
 
 export default function useRegister(){
-    const [isLoading, setIsLoading] = useState<boolean>(false); 
-    const [error, setError] = useState<string | null>(null); 
-    const submit = async (user:RegisterForm) => {
-        try{
-            setIsLoading(true);
-            setError(null);
+return useMutation({
+    mutationFn: (payload:RegisterForm) => registerUser(payload),
+    onError: (error: any) => {
+      console.error("Register error:", error?.response?.data ?? error.message);
+    },
 
-            const data:User = await register(user);
+    onSuccess: (data) => {
+      console.log("Registered:", data);
+    },
+})
+    }
 
-            return data;
-            
-        }catch(err:any){
-            console.log(err);
-        }finally{
-            setIsLoading(false);
-        }
-    }
-    
-    return {
-        submit, error, isLoading
-    }
-}

@@ -34,7 +34,7 @@ export function RegisterForm() {
     },
   });
 
-  const {submit} = useRegister();
+    const {mutate} = useRegister();
 
   const onSubmit = async (data: RegisterForm) => {
     toast("You submitted the following values", {
@@ -45,7 +45,7 @@ export function RegisterForm() {
       ),
     });
 
-    submit(data)
+    mutate(data)
   };
 
   return (
