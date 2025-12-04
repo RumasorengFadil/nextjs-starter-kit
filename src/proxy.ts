@@ -1,8 +1,8 @@
 import { NextResponse, NextRequest } from "next/server";
-const protectedRoutes = ["/dashboard", "/admin"];
-const authRoutes = ["/login", "/register"];
 import jwt from "jsonwebtoken";
 
+const protectedRoutes = ["/dashboard", "/admin"];
+const authRoutes = ["/login", "/register"];
 // This function can be marked `async` if using `await` inside
 export function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
@@ -23,19 +23,27 @@ export function proxy(request: NextRequest) {
   if (accessToken && isAuthPage) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
-
+  
   if(accessToken){
     // Already Logged in but not yet verified → redirect to verify-email
-   const decoded: any = jwt.decode(accessToken);
+    const decoded: any = jwt.decode(accessToken);
+    console.log("decoded: " + decoded.isEmailVerified);
+    
+    if(!decoded.isEmailVerified && isProtected){
+      return NextResponse.redirect(new URL("/verify-email", request.url));
+    }
+    if(decoded.isEmailVerified && pathname.startsWith('/verify-email')){
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
+}
 
-   if(!decoded.isEmailVerified && isProtected){
-    return NextResponse.redirect(new URL("/", request.url));
-   }
-  }
+if(!accessToken && pathname.startsWith('/verify-email')){
+  return NextResponse.redirect(new URL("/", request.url));
+}
   
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/admin/:path*", "/login", "/register"],
+  matcher: ["/dashboard/:path*", "/admin/:path*", "/login", "/register", "/verify-email"],
 };
