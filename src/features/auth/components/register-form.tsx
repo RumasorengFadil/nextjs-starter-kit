@@ -27,26 +27,16 @@ export function RegisterForm() {
   const form = useForm<RegisterForm>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      name:"",
+      name: "",
       email: "",
       password: "",
       confirmPassword: "",
     },
   });
 
-    const {mutate} = useRegister();
+  const { mutate } = useRegister();
 
-  const onSubmit = async (data: RegisterForm) => {
-    toast("You submitted the following values", {
-      description: (
-        <pre className="mt-2 w-[320px] rounded-md bg-neutral-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-
-    mutate(data)
-  };
+  const onSubmit = async (data: RegisterForm) => mutate(data);
 
   return (
     <Form {...form}>

@@ -1,11 +1,8 @@
+import { api } from "@/lib/api";
 import { LoginCredentials, RegisterForm } from "./types";
-import axios from "axios";
 
 export async function registerUser(user:RegisterForm){
-    const res = await axios.post("/auth/register", user, {
-        baseURL:process.env.NEXT_PUBLIC_API_URL, 
-        withCredentials:true
-    });
+    const res = await api.post("/auth/register", user);
 
     return res.data;
 }

@@ -9,3 +9,10 @@ export const api = axios.create({
     Accept: "application/json",
   },
 });
+
+api.interceptors.response.use(
+  (res) => res,
+  (err) => {
+    return Promise.reject(err);
+  }
+);
