@@ -7,7 +7,7 @@ export async function registerUser(user:RegisterForm){
     return res.data;
 }
 
-export async function login(credentials:LoginCredentials){
+export async function loginUser(credentials:LoginCredentials){
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
         method:"POST",
         body:JSON.stringify(credentials), 
@@ -17,7 +17,7 @@ export async function login(credentials:LoginCredentials){
     return res.json();
 }
 
-export async function refresh(){
+export async function refreshToken(){
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, {
         method:"POST",
         credentials:"include"
@@ -35,7 +35,13 @@ export async function google(){
     return res.json();
 }
 
-export async function verify(token:string){
+export async function me(){
+    const res = await api.get("/auth/me");
+
+    return res.data;
+}
+
+export async function verifyEmail(token:string){
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/verify/?token=${token}`, {
         method:"POST",
         credentials:"include"

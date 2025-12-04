@@ -6,11 +6,11 @@ export default function useRegister(){
     return useMutation({
         mutationFn: (payload:RegisterForm) => registerUser(payload),
         onError: (error: any) => {
-        console.error("Register error:", error?.response?.data ?? error.message);
+            console.error("Register error:", error?.response?.data ?? error.message);
         },
 
         onSuccess: (data) => {
-        console.log("Registered:", data);
+            console.log("Registered:", data);
         },
     })
 }

@@ -23,11 +23,6 @@ export function ReactQueryProvider({ children }: { children: React.ReactNode }) 
         },
         queryCache: new QueryCache({
           onError: (error: any) => {
-            const msg =
-              error?.response?.data?.message ||
-              error?.message ||
-              "Terjadi kesalahan";
-
             toast.error(extractErrorMessage(error));
           },
         }),

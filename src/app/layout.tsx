@@ -11,6 +11,7 @@ import { THEME_MODE_VALUES, THEME_PRESET_VALUES, type ThemePreset, type ThemeMod
 
 import "./globals.css";
 import { ReactQueryProvider } from "@/context/providers/react-query.provider";
+import AuthBoot from "@/components/auth-boot";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,8 +31,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <body className={`${inter.className} min-h-screen antialiased`}>
         <PreferencesStoreProvider themeMode={themeMode} themePreset={themePreset}>
           <ReactQueryProvider>
-          {children}
-          <Toaster />
+            {children}
+            <AuthBoot />
+            <Toaster />
           </ReactQueryProvider>
         </PreferencesStoreProvider>
       </body>

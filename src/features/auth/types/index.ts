@@ -1,8 +1,13 @@
 // features/auth/types/index.ts
 export interface User {
-  id: string
-  email: string
-  name: string
+    id: string
+    name: string
+    email: string
+    password: string
+    provider: string
+    providerId: string | null
+    isEmailVerified: boolean
+    verificationTokens: []
 }
 export interface RegisterForm {
   email: string
